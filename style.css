@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Oswald:wght@600&family=Roboto+Condensed:wght@700&family=Uchen&display=swap");
+/* font-family: 'Dancing Script', cursive;
+font-family: 'Oswald', sans-serif;
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Uchen', serif; */
+.navbar {
+  height: 5rem;
+  background-color: white;
+  color: black;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2 !important;
+}
+.navbar .navbar-brand {
+  color: black;
+  font-family: "Oswald", sans-serif;
+  font-size: 2.5rem;
+}
+.navbar ul li a {
+  color: black !important;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.x {
+  color: #00c6f2;
+}
+.search {
+  border-radius: 5rem;
+  border: 1px solid #00c6f2;
+  outline: none;
+  padding: 0.1rem;
+  height: 3rem;
+}
+.icon {
+  font-size: 20px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+.navbar a {
+  color: black;
+}
+.i1 {
+  background-color: #dff9ff;
+  padding: 1rem;
+  border-radius: 50%;
+}
+.icon1 {
+  position: relative;
+  top: -15px;
+  right: 10px;
+  width: 28px;
+  height: 30px;
+  background-color: #00c6f2;
+  padding-left: 0.2rem;
+  border-radius: 50%;
+}
+.btn-1 {
+  background-color: #00c6f2;
+  padding: 0.7rem;
+  font-weight: bold;
+  border-radius: 2rem;
+  color: black;
+  border: none;
+  text-decoration: none;
+}
+.navbar ul li a:hover {
+  border-bottom: 3px solid #000;
+}
+.img-1 {
+  background: url("images/01c.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 75vh;
+}
+.img-2 {
+  background: url("images/02c.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 75vh;
+}
+.img-3 {
+  background: url("images/03c.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 75vh;
+}
+.text-area {
+  font-family: "Roboto Condensed", sans-serif;
+  margin-bottom: 6rem;
+}
+.item1::before {
+  content: "";
+  display: block;
+  background: rgba(0, 0, 0, 0.7);
+  height: 75vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.img-card {
+  height: 50vh;
+  border-radius: 10%;
+}
+.c-2 {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.c-1 {
+  position: absolute;
+  top: 20%;
+  right: 0;
+  left: 0;
+  color: #00c6f2;
+  z-index: 1;
+  font-family: "Dancing Script", cursive;
+}
+.overlay-c {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 50vh;
+  border-radius: 10%;
+  position: absolute;
+  top: 0;
+}
+.btn-2 {
+  position: absolute;
+  top: 70%;
+  right: 0;
+  left: 35%;
+  border: 1px solid white !important;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+  padding: 0.7rem;
+  font-weight: bold;
+  border-radius: 2rem;
+  border: none;
+}
+.btn-2:hover {
+  background-color: white;
+  color: #000;
+}
+.card {
+  border: none !important;
+}
+.categories {
+  font-family: "Uchen", serif;
+  font-weight: bolder;
+  font-size: 2.9rem;
+}
+.fa-star {
+  color: #ff9529;
+}
+.card-1 {
+  width: 22rem;
+}
+.image-hero {
+  background-image: url("images/23.jpg");
+  height: 60vh;
+  background-position: center;
+  background-size: cover;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 60vh;
+}
+.tex {
+  font-family: "Dancing Script", cursive;
+  font-size: 5.2rem;
+}
+footer {
+  background-color: #1e2021;
+  color: white;
+  font-size: 1.1rem;
+  text-align: center;
+  height: 26vh;
+  padding-top: 3.5rem;
+}
+.img-n {
+  height: 85vh;
+  width: 40vw;
+}
+.view-img {
+  height: 70px;
+  width: 70px;
+}
+.btn-v {
+  background-color: #00c6f2;
+  border: none;
+  padding: 1rem;
+  font-weight: bold;
+}
+.inputnum {
+  width: 2.9rem;
+}
+.cart-img {
+  width: 11rem;
+  height: 12rem;
+}
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0px;
+  font-size: 1.2rem;
+  width: 70rem;
+  border-radius: 5px 5px 0px 0px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.content-table thead tr {
+  background-color: #009879;
+  color: #fff;
+  text-align: left;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+}
+td {
+  font-size: 1.2rem;
+  font-family: "Oswald", sans-serif;
+}
+.cart-image {
+  width: 11rem;
+  height: 12rem;
+}
+.check {
+  font-family: "Oswald", sans-serif;
+}
+.btn-c {
+  font-size: 1.5rem;
+  font-family: "Oswald", sans-serif;
+}
