@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="https://fashion-x-store.vercel.app/">
+    <title>Fashion X is moving</title>
+  </head>
+  <body>
+    <p>Fashion X has moved to <a href="https://fashion-x-store.vercel.app/">its new home</a>.</p>
+    <script>
+      const base = "/Ecommerce-Website-Clone";
+      const path = location.pathname.startsWith(base)
+        ? location.pathname.slice(base.length) || "/"
+        : "/";
+      location.replace(`https://fashion-x-store.vercel.app${path}${location.search}${location.hash}`);
+    </script>
+  </body>
+</html>

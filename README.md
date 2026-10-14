@@ -11,6 +11,7 @@ npm run dev
 ```
 
 Open `http://localhost:3000`. The store catalog is sample content with demo pricing in USD; replace product copy, photos, and prices with inventory you are authorized to sell before accepting orders.
+`GET /api/health` is a basic application liveness check.
 
 ## Connect Firebase
 

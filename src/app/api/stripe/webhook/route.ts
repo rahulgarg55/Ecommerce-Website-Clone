@@ -2,6 +2,8 @@ import type Stripe from "stripe";
 import { getFirebaseAdminDb } from "@/lib/firebase/admin";
 import { getStripe } from "@/lib/stripe";
 
+export const runtime = "nodejs";
+
 export async function POST(request: Request) {
   const signature = request.headers.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;

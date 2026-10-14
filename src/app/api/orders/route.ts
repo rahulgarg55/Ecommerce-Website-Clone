@@ -1,6 +1,8 @@
 import { requireFirebaseUser } from "@/lib/auth-server";
 import { getFirebaseAdminDb } from "@/lib/firebase/admin";
 
+export const runtime = "nodejs";
+
 export async function GET(request: Request) {
   const authentication = await requireFirebaseUser(request);
   if (authentication.response) return authentication.response;

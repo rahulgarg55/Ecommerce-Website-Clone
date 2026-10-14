@@ -4,6 +4,8 @@ import { getFirebaseAdminDb } from "@/lib/firebase/admin";
 import { findProduct, sizes } from "@/lib/catalog";
 import { getStripe } from "@/lib/stripe";
 
+export const runtime = "nodejs";
+
 const checkoutSchema = z.object({
   items: z.array(z.object({
     productId: z.string().min(1).max(80),
