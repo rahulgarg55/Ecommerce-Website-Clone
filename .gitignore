@@ -1,0 +1,13 @@
+node_modules/
+.next/
+*.tsbuildinfo
+out/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.vercel/
+firebase-debug.log
+firestore-debug.log

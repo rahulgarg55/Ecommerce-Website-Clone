@@ -1,0 +1,31 @@
+{
+  "name": "fashion-x-store",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@firebase/app": "^0.16.3",
+    "@firebase/auth": "^1.13.7",
+    "firebase-admin": "^14.5.0",
+    "lucide-react": "^1.47.0",
+    "next": "16.4.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "stripe": "^18.0.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.4.1",
+    "typescript": "^5.0.0"
+  }
+}
