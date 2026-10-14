@@ -1,8 +1,6 @@
 import { z } from "zod";
 import { requireFirebaseUser } from "@/lib/auth-server";
-import { getFirebaseAdminDb } from "@/lib/firebase/admin";
 import { findProduct, sizes } from "@/lib/catalog";
-import { getStripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
 
@@ -44,30 +42,32 @@ export async function POST(request: Request) {
   const verifiedItems = items.flatMap((item) => item.product ? [{ ...item, product: item.product }] : []);
   const subtotal = verifiedItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
   const shipping = subtotal >= 100 ? 0 : 8;
-  const orderRef = getFirebaseAdminDb().collection("orders").doc();
-  const now = new Date().toISOString();
-  const order = {
-    id: orderRef.id,
-    userId: authentication.user.uid,
-    email: authentication.user.email ?? "",
-    status: "pending",
-    currency: "usd",
-    subtotal,
-    shipping,
-    total: subtotal + shipping,
-    items: verifiedItems.map(({ product, size, quantity }) => ({
-      productId: product.id,
-      name: product.name,
-      image: product.image,
-      size,
-      quantity,
-      unitPrice: product.price,
-    })),
-    createdAt: now,
-  };
-
-  await orderRef.set(order);
+  let deletePendingOrder: (() => Promise<unknown>) | undefined;
   try {
+    const { getFirebaseAdminDb } = await import("@/lib/firebase/admin");
+    const orderRef = getFirebaseAdminDb().collection("orders").doc();
+    const order = {
+      id: orderRef.id,
+      userId: authentication.user.uid,
+      email: authentication.user.email ?? "",
+      status: "pending",
+      currency: "usd",
+      subtotal,
+      shipping,
+      total: subtotal + shipping,
+      items: verifiedItems.map(({ product, size, quantity }) => ({
+        productId: product.id,
+        name: product.name,
+        image: product.image,
+        size,
+        quantity,
+        unitPrice: product.price,
+      })),
+      createdAt: new Date().toISOString(),
+    };
+
+    await orderRef.set(order);
+    deletePendingOrder = () => orderRef.delete();
     const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
     const origin = configuredSiteUrl
       ? new URL(configuredSiteUrl).origin
@@ -78,6 +78,7 @@ export async function POST(request: Request) {
       await orderRef.delete();
       return Response.json({ error: "The store owner needs to set NEXT_PUBLIC_SITE_URL before checkout is enabled." }, { status: 503 });
     }
+    const { getStripe } = await import("@/lib/stripe");
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       customer_email: authentication.user.email ?? undefined,
@@ -114,7 +115,10 @@ export async function POST(request: Request) {
     await orderRef.update({ stripeSessionId: session.id });
     return Response.json({ url: session.url });
   } catch (error) {
-    await orderRef.delete();
+    if (deletePendingOrder) await deletePendingOrder();
+    if (error instanceof Error && error.message.includes("Firebase Admin credentials are not configured")) {
+      return Response.json({ error: "Account services are not configured yet." }, { status: 503 });
+    }
     if (error instanceof Error && error.message.includes("STRIPE_SECRET_KEY")) {
       return Response.json({ error: "Secure checkout is not enabled yet. The store owner needs to connect Stripe." }, { status: 503 });
     }

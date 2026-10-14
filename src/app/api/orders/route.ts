@@ -1,5 +1,4 @@
 import { requireFirebaseUser } from "@/lib/auth-server";
-import { getFirebaseAdminDb } from "@/lib/firebase/admin";
 
 export const runtime = "nodejs";
 
@@ -8,6 +7,7 @@ export async function GET(request: Request) {
   if (authentication.response) return authentication.response;
 
   try {
+    const { getFirebaseAdminDb } = await import("@/lib/firebase/admin");
     const snapshot = await getFirebaseAdminDb()
       .collection("orders")
       .where("userId", "==", authentication.user.uid)

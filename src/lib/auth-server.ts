@@ -1,5 +1,4 @@
 import "server-only";
-import { getFirebaseAdminAuth } from "@/lib/firebase/admin";
 
 export async function requireFirebaseUser(request: Request) {
   const authorization = request.headers.get("authorization");
@@ -9,6 +8,7 @@ export async function requireFirebaseUser(request: Request) {
   }
 
   try {
+    const { getFirebaseAdminAuth } = await import("@/lib/firebase/admin");
     const user = await getFirebaseAdminAuth().verifyIdToken(match[1]);
     return { user, response: null };
   } catch (error) {

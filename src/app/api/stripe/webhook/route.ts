@@ -1,6 +1,4 @@
 import type Stripe from "stripe";
-import { getFirebaseAdminDb } from "@/lib/firebase/admin";
-import { getStripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
 
@@ -14,8 +12,12 @@ export async function POST(request: Request) {
   const rawBody = await request.text();
   let event: Stripe.Event;
   try {
+    const { getStripe } = await import("@/lib/stripe");
     event = getStripe().webhooks.constructEvent(rawBody, signature, webhookSecret);
   } catch (error) {
+    if (error instanceof Error && error.message.includes("STRIPE_SECRET_KEY")) {
+      return Response.json({ error: "Stripe is not configured yet." }, { status: 503 });
+    }
     console.error("Stripe webhook signature verification failed.", error);
     return Response.json({ error: "Invalid webhook signature." }, { status: 400 });
   }
@@ -36,6 +38,7 @@ export async function POST(request: Request) {
   }
 
   try {
+    const { getFirebaseAdminDb } = await import("@/lib/firebase/admin");
     const orderRef = getFirebaseAdminDb().collection("orders").doc(orderId);
     const order = await orderRef.get();
     if (!order.exists) {
