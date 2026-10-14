@@ -2,6 +2,10 @@
 
 Fashion X is a responsive apparel storefront rebuilt from the repository's original static demo. It includes product discovery, product details and sizing, a persistent local bag and saved list, Firebase email/Google authentication, account order history, and a Stripe-hosted checkout flow with server-side price validation and signed webhook confirmation.
 
+## Public preview
+
+Browse the deployed storefront at [fashion-x-store.vercel.app](https://fashion-x-store.vercel.app/). The existing GitHub Pages URL forwards to this deployment. This is a browseable preview with sample products and prices; Firebase and Stripe credentials are not configured, so account actions and real payments remain disabled.
+
 ## Run locally
 
 ```sh
@@ -40,6 +44,6 @@ Checkout currently offers USD shipping to the US, Canada, UK, Australia, and Ind
 
 ## Deploy on Vercel
 
-Import `rahulgarg55/Ecommerce-Website-Clone` into Vercel with the repository root as the project root. Add all Firebase and Stripe environment variables to the Vercel project, deploy Firestore rules/indexes, and redeploy. Configure the Stripe webhook against the Vercel production domain. Never commit `.env.local`, Firebase service-account keys, or Stripe secret keys.
+The `fashion-x-store` Vercel project is connected to `rahulgarg55/Ecommerce-Website-Clone`; pushes to `master` deploy automatically. Before enabling live commerce, add all Firebase and Stripe environment variables to the Vercel project, deploy Firestore rules/indexes, and redeploy. Configure the Stripe webhook against the Vercel production domain. Never commit `.env.local`, Firebase service-account keys, or Stripe secret keys.
 
 Until credentials are configured, the storefront remains browseable, but account creation, order history, and checkout are intentionally unavailable. Do not advertise real payments as enabled until Firebase and Stripe test-mode checkout have both been verified end to end.
